@@ -16,38 +16,11 @@ function getParametersForUnsplash({ width, height, quality, format }) {
  * 파라미터로 넘어온 문자열에서 일부 특수문자를 제거하는 함수
  * (Markdown으로 된 문자열의 특수문자를 제거하기 위함)
  * */
+
+// 정규식 엔진의 경우 효과적인 알고리즘을 사용하므로 입력크기가 커져도 성능이 더 빠름 (반복문 -> 정규식으로 코드 수정)
 function removeSpecialCharacter(str) {
-  const removeCharacters = [
-    "#",
-    "_",
-    "*",
-    "~",
-    "&",
-    ";",
-    "!",
-    "[",
-    "]",
-    "`",
-    ">",
-    "\n",
-    "=",
-    "-",
-  ];
-  let _str = str;
-  let i = 0,
-    j = 0;
-
-  for (i = 0; i < removeCharacters.length; i++) {
-    j = 0;
-    while (j < _str.length) {
-      if (_str[j] === removeCharacters[i]) {
-        _str = _str.substring(0, j).concat(_str.substring(j + 1));
-        continue;
-      }
-      j++;
-    }
-  }
-
+  let _str = str.substring(0, 300);
+  _str = _str.replace(/[#_*~&;![\]`>\n=\->]/g, "");
   return _str;
 }
 
