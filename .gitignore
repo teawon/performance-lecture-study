@@ -1,0 +1,29 @@
+# dependencies
+lecture*/node_modules
+lecture*/.pnp
+lecture*/.pnp.js
+
+# testing
+lecture*/coverage
+
+# production
+lecture*/build
+
+# misc
+lecture*/.DS_Store
+lecture*/.env.local
+lecture*/.env.development.local
+lecture*/.env.test.local
+lecture*/.env.production.local
+lecture*/.idea
+
+lecture*/npm-debug.log*
+lecture*/yarn-debug.log*
+lecture*/yarn-error.log*
+
+# prettier
+lecture*/.prettierrc
+
+# DS_Store
+
+.DS_Store
