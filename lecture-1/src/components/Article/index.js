@@ -73,8 +73,9 @@ function Article(props) {
           src={
             props.image +
             getParametersForUnsplash({
-              width: 1400,
-              height: 1400,
+              // CDN을 사용해서 적절한 크기의 이미지를 받아온다. 120의 2배크기인 240px로 크기 지정(적절치)
+              width: 240,
+              height: 240,
               quality: 80,
               format: "jpg",
             })
