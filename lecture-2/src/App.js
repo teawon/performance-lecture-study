@@ -13,6 +13,10 @@ function App() {
   useEffect(() => {
     import("./components/ImageModal").catch();
     // Hover보다 더 빠르게, 모든 컴포넌트가 마운트 완료되면 추가로 로드
+
+    const img = new Image();
+    img.src =
+      "https://stillmed.olympic.org/media/Photos/2016/08/20/part-1/20-08-2016-Football-Men-01.jpg?interpolation=lanczos-none&resize=*:800";
   }, []);
 
   // const handleMouseEnter = () => {
