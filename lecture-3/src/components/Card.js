@@ -10,6 +10,8 @@ function Card(props) {
       // threshhold: 0,                              // 0~1 사이의 값으로, 이미지 노출 비율을 의미한다. 1이면 전부 보여야 실행
       // rootMargin: "1000px 1000px 1000px 1000px",  // 이미지가 미리 로딩되도록 여유분을 준다
     };
+
+    // 이때 이미지의 크기를 미리 지정하지않으면, threshold를 1로 하더라도, 이미지 높이가 0이라서 이미지 전체가 보이지 않아도 로딩된다.
     const callback = (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
