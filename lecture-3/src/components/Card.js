@@ -15,8 +15,12 @@ function Card(props) {
     const callback = (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log("is intersecting", entry.target.dataset.src);
-          entry.target.src = entry.target.dataset.src;
+          const target = entry.target;
+          const previousSibling = target.previousSibling;
+          // previousSibling 은 DOM에서 이전 형제 요소를 참조하는 속성
+          // ref자체가 img태그를 가리키기 때문에 상위의 source에 접근하기 위해 사용한다
+          target.src = target.dataset.src;
+          previousSibling.srcset = previousSibling.dataset.srcset;
           observer.unobserve(entry.target);
         }
       });
@@ -32,11 +36,17 @@ function Card(props) {
   return (
     <div className="Card text-center">
       {/* lazy옵션을 통해 직접 넣으면, 브라우저내에서 자체적으로 해당 이미지를 지연로딩시킨다. 단 어느정도 여백을 남기고 미리 받는듯 */}
-      <img
+      {/* <img
         data-src={props.image}
         ref={imgRef}
         //    loading="lazy"
-      />
+      /> */}
+
+      {/* 가장 상위의 WebP이미지를 우선으로 로드하고 이어서 아래로 아래로.. */}
+      <picture>
+        <source data-srcset={props.webp} type="image/webp" />
+        <img data-src={props.image} ref={imgRef} />
+      </picture>
       <div className="p-5 font-semibold text-gray-700 text-xl md:text-lg lg:text-xl keep-all">
         {props.children}
       </div>

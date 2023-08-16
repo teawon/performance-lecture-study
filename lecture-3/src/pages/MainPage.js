@@ -4,12 +4,18 @@ import ThreeColumns from "../components/ThreeColumns";
 import TwoColumns from "../components/TwoColumns";
 import Card from "../components/Card";
 import Meta from "../components/Meta";
-import main1 from "../assets/main1.jpg";
-import main2 from "../assets/main2.jpg";
-import main3 from "../assets/main3.jpg";
-import main_items from "../assets/main-items.jpg";
-import main_parts from "../assets/main-parts.jpg";
-import main_styles from "../assets/main-styles.jpg";
+import main1 from "../assets/_main1.jpg";
+import main2 from "../assets/_main2.jpg";
+import main3 from "../assets/_main3.jpg";
+import main1_webp from "../assets/_main1.webp";
+import main2_webp from "../assets/_main2.webp";
+import main3_webp from "../assets/_main3.webp";
+import main_items from "../assets/_main-items.jpg";
+import main_parts from "../assets/_main-parts.jpg";
+import main_styles from "../assets/_main-styles.jpg";
+import main_items_webp from "../assets/_main-items.webp";
+import main_parts_webp from "../assets/_main-parts.webp";
+import main_styles_webp from "../assets/_main-styles.webp";
 
 function MainPage(props) {
   const imgEl1 = useRef(null);
@@ -22,6 +28,8 @@ function MainPage(props) {
     const callback = (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
+          const sourceEl = entry.target.previousSibling;
+          sourceEl.srcset = sourceEl.dataset.srcset;
           entry.target.src = entry.target.dataset.src;
           observer.unobserve(entry.target);
         }
@@ -40,15 +48,25 @@ function MainPage(props) {
       <div className="mx-auto">
         <ThreeColumns
           columns={[
-            <Card image={main1}>롱보드는 아주 재밌습니다.</Card>,
-            <Card image={main2}>롱보드를 타면 아주 신납니다.</Card>,
-            <Card image={main3}>롱보드는 굉장히 재밌습니다.</Card>,
+            <Card image={main1} webp={main1_webp}>
+              롱보드는 아주 재밌습니다.
+            </Card>,
+            <Card image={main2} webp={main2_webp}>
+              롱보드를 타면 아주 신납니다.
+            </Card>,
+            <Card image={main3} webp={main3_webp}>
+              롱보드는 굉장히 재밌습니다.
+            </Card>,
           ]}
         />
         <TwoColumns
           bgColor={"#f4f4f4"}
           columns={[
-            <img data-src={main_items} ref={imgEl1} />,
+            <picture>
+              <source data-srcset={main_items_webp} type="image/webp" />
+              <img data-src={main_items} ref={imgEl1} />
+            </picture>,
+
             <Meta
               title={"Items"}
               content={
@@ -68,14 +86,21 @@ function MainPage(props) {
               }
               btnLink={"/part"}
             />,
-            <img data-src={main_parts} ref={imgEl2} />,
+
+            <picture>
+              <source data-srcset={main_parts_webp} type="image/webp" />
+              <img data-src={main_parts} ref={imgEl2} />,
+            </picture>,
           ]}
           mobileReverse={true}
         />
         <TwoColumns
           bgColor={"#f4f4f4"}
           columns={[
-            <img data-src={main_styles} ref={imgEl3} />,
+            <picture>
+              <source data-srcset={main_styles_webp} type="image/webp" />
+              <img data-src={main_styles} ref={imgEl3} />,
+            </picture>,
             <Meta
               title={"Riding Styles"}
               content={
