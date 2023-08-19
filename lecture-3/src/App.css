@@ -4,8 +4,11 @@
 
 @font-face {
   font-family: BMYEONSUNG;
-  src: url("./assets/fonts/BMYEONSUNG.ttf");
+  src: url("./assets/fonts/subset-BMYEONSUNG.ttf") format("woff2"),
+    url("./assets/fonts/subset-BMYEONSUNG.woff") format("woff"),
+    url("./assets/fonts/subset-BMYEONSUNG.ttf") format("truetype");
   font-display: block;
+  /*  위에서부터 우선적으로 폰트를 다운로드 */
 }
 
 .BannerVideo {
