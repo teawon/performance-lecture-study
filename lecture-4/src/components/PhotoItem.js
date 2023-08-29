@@ -3,19 +3,28 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { showModal } from '../redux/imageModal';
 import LazyLoad from 'react-lazyload';
+import { setBgColor } from '../redux/imageModal';
+import { getAverageColorOfImage } from '../utils/getAverageColorOfImage';
 
 function PhotoItem({ photo: { urls, alt } }) {
   const dispatch = useDispatch();
 
-  const openModal = () => {
+  const openModal = e => {
     dispatch(showModal({ src: urls.full, alt }));
+    const averageColor = getAverageColorOfImage(e.target);
+    dispatch(setBgColor(averageColor));
   };
 
   return (
     <ImageWrap>
       <LazyLoad offset={1000}>
         {/* 1000px 미리 로딩 */}
-        <Image src={urls.small + '&t=' + new Date().getTime()} alt={alt} onClick={openModal} />
+        <Image
+          src={urls.small + '&t=' + new Date().getTime()}
+          alt={alt}
+          onClick={openModal}
+          crossOrigin="*"
+        />
       </LazyLoad>
     </ImageWrap>
   );
